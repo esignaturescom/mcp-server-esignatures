@@ -112,7 +112,7 @@ async def serve() -> Server:
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "list_templates":
             response = await httpxClient.get(f"/api/templates?token={secret_token}")
-            return [types.TextContent(type="text", text=f"Title: '{template}'") for template in response.json().get("data", [])]
+            return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
 
         raise ValueError(f"Unknown tool: {name}")
 

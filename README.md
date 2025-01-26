@@ -39,6 +39,10 @@ Command: `Review my templates for legal compliance, and ask me about updating ea
 
 ## Install
 
+### Create an eSignatures account
+
+Create an eSignatures account at https://esignatures.com for free, to test the Agent AI by creating templates and sending test contracts.
+
 ### Claude Desktop
 
 On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`

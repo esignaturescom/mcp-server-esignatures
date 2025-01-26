@@ -13,6 +13,7 @@ import mcp.server.stdio
 
 from .input_schema_contracts import INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_QUERY_CONTRACT, INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_WITHDRAW_CONTRACT, INPUT_SCHEMA_DELETE_CONTRACT, INPUT_SCHEMA_LIST_RECENT_CONTRACTS
 from .input_schema_templates import INPUT_SCHEMA_CREATE_TEMPLATE, INPUT_SCHEMA_QUERY_TEMPLATE, INPUT_SCHEMA_UPDATE_TEMPLATE, INPUT_SCHEMA_DELETE_TEMPLATE, INPUT_SCHEMA_LIST_TEMPLATES
+from .input_schema_template_collaborators import INPUT_SCHEMA_ADD_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_REMOVE_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_LIST_TEMPLATE_COLLABORATORS
 
 ESIGNATURES_SECRET_TOKEN = getenv("ESIGNATURES_SECRET_TOKEN")
 ESIGNATURES_API_BASE = "https://esignatures.com"
@@ -75,6 +76,22 @@ async def serve() -> Server:
                 name="list_templates",
                 description="Lists the templates.",
                 inputSchema=INPUT_SCHEMA_LIST_TEMPLATES
+            ),
+
+            types.Tool(
+                name="add_template_collaborator",
+                description="Creates a HTTPS link for editing a contract template; sends an invitation email if an email is provided..",
+                inputSchema=INPUT_SCHEMA_ADD_TEMPLATE_COLLABORATOR
+            ),
+            types.Tool(
+                name="remove_template_collaborator",
+                description="Removes the template collaborator",
+                inputSchema=INPUT_SCHEMA_REMOVE_TEMPLATE_COLLABORATOR
+            ),
+            types.Tool(
+                name="list_template_collaborators",
+                description="Returns the list of template collaborators, including their GUID, name, email, and the HTTPS link for editing the template",
+                inputSchema=INPUT_SCHEMA_LIST_TEMPLATE_COLLABORATORS
             )
         ]
 
@@ -112,6 +129,16 @@ async def serve() -> Server:
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "list_templates":
             response = await httpxClient.get(f"/api/templates?token={secret_token}")
+            return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
+
+        if name == "add_template_collaborator":
+            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/collaborators?token={secret_token}", json=arguments)
+            return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
+        if name == "remove_template_collaborator":
+            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/collaborators/{arguments.get('template_collaborator_id')}/remove?token={secret_token}")
+            return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
+        if name == "list_template_collaborators":
+            response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}/collaborators?token={secret_token}")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
 
         raise ValueError(f"Unknown tool: {name}")

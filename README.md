@@ -21,6 +21,7 @@ These tools are designed to make managing contracts and templates straightforwar
 - **Update Template**: Modify an existing template if you need to change future contracts based on it.
 - **Delete Template**: Delete templates that are no longer in use or relevant.
 - **List Templates**: List the templates you have in eSignatures.
+- **Add/Remove/List Collaborators**: Invite persons to edit a template.
 
 ## Examples of Usage
 
@@ -35,6 +36,10 @@ Command: `Send an NDA based on my template to John Doe, ACME Corp, john@acme.com
 #### Example 3: Updating templates
 
 Command: `Review my templates for legal compliance, and ask me about updating each one individually`
+
+#### Example 4: Inviting template collaborators
+
+Command: `Invite John Doe to edit the NDA template, email: john@acme.com`
 
 
 ## Install

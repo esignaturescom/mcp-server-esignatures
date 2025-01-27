@@ -34,7 +34,7 @@ MCP server for eSignatures (https://esignatures.com)
 
 #### Sending a Contract
 
-`Send an NDA based on my template to John Doe, ACME Corp, john@acme.com`
+`Send an NDA based on my template to John Doe, ACME Corp, john@acme.com. Set the term to 2 years.`
 
 #### Updating templates
 

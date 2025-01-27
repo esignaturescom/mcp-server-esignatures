@@ -6,42 +6,43 @@ MCP server for eSignatures (https://esignatures.com)
 
 ## Tools
 
-These tools are designed to make managing contracts and templates straightforward, ensuring that everything from creation to finalization is smooth and customizable to your needs.
 
-### For Contract Management:
+| Tool                           | Category      | Description                        |
+|--------------------------------|---------------|------------------------------------|
+| `create_contract`              | Contracts     | Draft for review or send contract  |
+| `query_contract`               | Contracts     | Retrieve contract info             |
+| `withdraw_contract`            | Contracts     | Withdraw an unsigned contract      |
+| `delete_contract`              | Contracts     | Delete a draft or test contract    |
+| `list_recent_contracts`        | Contracts     | List the recent contracts          |
+|                                |               |                                    |
+| `create_template`              | Templates     | Create a new contract template     |
+| `update_template`              | Templates     | Update an existing template        |
+| `query_template`               | Templates     | Retrieve template content and info |
+| `delete_template`              | Templates     | Delete a template                  |
+| `list_templates`               | Templates     | List all your templates            |
+|                                |               |                                    |
+| `add_template_collaborator`    | Collaborators | Invite someone to edit a template  |
+| `remove_template_collaborator` | Collaborators | Revoke template editing rights     |
+| `list_template_collaborators`  | Collaborators | View who can edit a template       |
 
-- **Create Contract**: Create a draft contract for review, or send it instantly. You can choose templates or dynamic content, customize emails, set expiration dates, and more.
-- **Query Contract**: Look up any contract by its unique ID to check its status or details.
-- **Withdraw Contract**: If you've sent out a contract but haven't received signatures yet, you can pull it back with this tool.
-- **Delete Contract**: Remove a contract from the system when it's no longer needed.
-- **List Recent Contracts**: Get an overview of the recent contracts you've created or managed.
 
-### For Template Management:
+## Examples
 
-- **Create Template**: Create reusable contract templates with Placeholder fields for dynamic content. This makes setting up new contracts much faster.
-- **Query Template**: Fetch details of any template you've made, handy for updates or reference.
-- **Update Template**: Modify an existing template if you need to change future contracts based on it.
-- **Delete Template**: Delete templates that are no longer in use or relevant.
-- **List Templates**: List the templates you have in eSignatures.
-- **Add/Remove/List Collaborators**: Invite persons to edit a template.
+#### Creating a Draft Contract
 
-## Examples of Usage
+`Generate a draft NDA contract for a publisher, which I can review and send. Signer: John Doe, ACME Corp, john@acme.com`
 
-#### Example 1: Creating a Draft Contract
+#### Sending a Contract
 
-Command: `Generate a draft contract so I can review and send it, using the NDA template, signer: John Doe, ACME Corp, john@acme.com`
+`Send an NDA based on my template to John Doe, ACME Corp, john@acme.com`
 
-#### Example 2: Sending a Contract
+#### Updating templates
 
-Command: `Send an NDA based on my template to John Doe, ACME Corp, john@acme.com`
+`Review my templates for legal compliance, and ask me about updating each one individually`
 
-#### Example 3: Updating templates
+#### Inviting template collaborators
 
-Command: `Review my templates for legal compliance, and ask me about updating each one individually`
-
-#### Example 4: Inviting template collaborators
-
-Command: `Invite John Doe to edit the NDA template, email: john@acme.com`
+`Invite John Doe to edit the NDA template, email: john@acme.com`
 
 
 ## Install

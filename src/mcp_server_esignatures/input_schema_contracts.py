@@ -79,8 +79,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
                 "type": "object",
                 "properties": {
                     "signer_field_id": {"type": "string", "description": "Signer field ID of the Signer field, defined in the template or document_elements."},
-                    "default_value": {"type": "string", "description": "Default input value (use '1' for checkboxes and radio buttons, 'YYYY-mm-dd' for dates)."},
-                    "select_position": {"type": "string", "description": "Pre-selected option index for dropdowns (0-based)."},
+                    "default_value": {"type": "string", "description": "Default input value (use '1' for checkboxes and radio buttons, 'YYYY-mm-dd' for dates)."}
                 },
                 "required": ["signer_field_id"]
             }

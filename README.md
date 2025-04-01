@@ -1,4 +1,5 @@
 # mcp-server-esignatures MCP server
+[![smithery badge](https://smithery.ai/badge/@esignaturescom/mcp-server-esignatures)](https://smithery.ai/server/@esignaturescom/mcp-server-esignatures)
 
 MCP server for eSignatures (https://esignatures.com)
 
@@ -46,6 +47,14 @@ MCP server for eSignatures (https://esignatures.com)
 
 
 ## Install
+
+### Installing via Smithery
+
+To install mcp-server-esignatures for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@esignaturescom/mcp-server-esignatures):
+
+```bash
+npx -y @smithery/cli install @esignaturescom/mcp-server-esignatures --client claude
+```
 
 ### Create an eSignatures account
 

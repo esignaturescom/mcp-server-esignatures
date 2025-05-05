@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/esignaturescom-mcp-server-esignatures-badge.png)](https://mseep.ai/app/esignaturescom-mcp-server-esignatures)
+
 # mcp-server-esignatures MCP server
 
 MCP server for eSignatures (https://esignatures.com)

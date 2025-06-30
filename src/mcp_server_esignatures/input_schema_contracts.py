@@ -5,7 +5,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
     "properties": {
         "template_id": {"type": "string", "description": "GUID of a mobile-friendly contract template within eSignatures. The template provides content, title, and labels. Required unless document_elements is provided."},
         "title": {"type": "string", "description": "Sets the contract's title, which appears as the first line in contracts and PDF files, in email subjects, and overrides the template's title."},
-        "locale": {"type": "string", "description": "Language for signer page and emails.", "enum": ["es", "hu", "da", "id", "ro", "sk", "pt", "hr", "sl", "de", "it", "pl", "rs", "sv", "en", "ja", "en-GB", "fr", "cz", "vi", "no", "zh-CN", "nl"]},
+        "locale": {"type": "string", "description": "Language for signer page and emails.", "enum": ["es", "hu", "da", "id", "gr", "ro", "sk", "pt", "hr", "sl", "de", "it", "pl", "rs", "sv", "en", "ja", "en-GB", "fr", "cz", "vi", "no", "zh-CN", "nl"]},
         "metadata": {"type": "string", "description": "Custom data for contract owners and webhook notifications; e.g. internal IDs."},
         "expires_in_hours": {"type": "string", "description": "Sets contract expiry time in hours; expired contracts can't be signed. Expiry period can be extended per contract in eSignatures."},
         "custom_webhook_url": {"type": "string", "description": "Overrides default webhook HTTPS URL for this contract, defined on the API page in eSignatures. Retries 6 times with 1 hour delays, timeout is 20 seconds."},

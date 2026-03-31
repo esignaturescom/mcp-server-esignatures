@@ -57,7 +57,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "api_key": {"type": "string", "description": "The template's placeholder key, e.g., for {{interest_rate}}, api_key is 'interest_rate'."},
+                    "placeholder_key": {"type": "string", "description": "The template's placeholder key, e.g., for {{interest_rate}}, placeholder_key is 'interest_rate'."},
                     "value": {"type": "string", "description": "Text that replaces the placeholder."},
                     "document_elements": {
                         "type": "array",

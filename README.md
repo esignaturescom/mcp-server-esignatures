@@ -5,42 +5,64 @@ MCP server for eSignatures (https://esignatures.com)
 ## Tools
 
 
-| Tool                           | Category      | Description                        |
-|--------------------------------|---------------|------------------------------------|
-| `create_contract`              | Contracts     | Draft for review or send contract  |
-| `query_contract`               | Contracts     | Retrieve contract info             |
-| `withdraw_contract`            | Contracts     | Withdraw an unsigned contract      |
-| `delete_contract`              | Contracts     | Delete a draft or test contract    |
-| `list_recent_contracts`        | Contracts     | List the recent contracts          |
-|                                |               |                                    |
-| `create_template`              | Templates     | Create a new contract template     |
-| `update_template`              | Templates     | Update an existing template        |
-| `query_template`               | Templates     | Retrieve template content and info |
-| `delete_template`              | Templates     | Delete a template                  |
-| `list_templates`               | Templates     | List all your templates            |
-|                                |               |                                    |
-| `add_template_collaborator`    | Collaborators | Invite someone to edit a template  |
-| `remove_template_collaborator` | Collaborators | Revoke template editing rights     |
-| `list_template_collaborators`  | Collaborators | View who can edit a template       |
+| Tool                           | Category      | Description                                       |
+|--------------------------------|---------------|---------------------------------------------------|
+| `create_contract`              | Contracts     | Draft for review or send contract                 |
+| `query_contract`               | Contracts     | Retrieve contract info                            |
+| `withdraw_contract`            | Contracts     | Withdraw an unsigned contract                     |
+| `delete_contract`              | Contracts     | Delete a draft or test contract                   |
+| `list_recent_contracts`        | Contracts     | List the recent contracts                         |
+|                                |               |                                                   |
+| `create_template`              | Templates     | Create a new contract template (Markdown body)    |
+| `update_template`              | Templates     | Update an existing template's title/labels        |
+| `update_template_content`      | Templates     | Edit a template's Markdown body via find/replace  |
+| `query_template`               | Templates     | Retrieve template metadata                        |
+| `query_template_content`       | Templates     | Retrieve a template's Markdown body               |
+| `delete_template`              | Templates     | Delete a template                                 |
+| `list_templates`               | Templates     | List all your templates                           |
+|                                |               |                                                   |
+| `add_template_collaborator`    | Collaborators | Invite someone to edit a template                 |
+| `remove_template_collaborator` | Collaborators | Revoke template editing rights                    |
+| `list_template_collaborators`  | Collaborators | View who can edit a template                      |
 
 
 ## Examples
 
-#### Creating a Draft Contract
+#### Creating a draft contract
 
-`Generate a draft NDA contract for a publisher, which I can review and send. Signer: John Doe, ACME Corp, john@acme.com`
+`Create a draft NDA for a publisher, ready for me to review and send. Signer: John Doe, ACME Corp, john@acme.com.`
 
-#### Sending a Contract
+#### Sending a contract from a template
 
-`Send an NDA based on my template to John Doe, ACME Corp, john@acme.com. Set the term to 2 years.`
+`Send an NDA based on my template to John Doe from ACME Corp at john@acme.com. Set the term to 2 years.`
 
-#### Updating templates
+#### Creating a new contract
 
-`Review my templates for legal compliance, and ask me about updating each one individually`
+`Create a contractor agreement for a graphic designer, including payment terms of net 14 days. Prepare it as a draft for review. Signer: John Doe, ACME Corp, john@acme.com.`
+
+#### Editing an existing template
+
+`Update my NDA template to include a 12-month non-solicitation clause.`
+
+#### Reviewing templates
+
+`Review my templates and suggest improvements. Do not apply any changes until I approve them one by one.`
+
+#### Finding the right template
+
+`Find the best template for onboarding a contractor and prepare a draft contract for John Doe.`
+
+#### Managing contracts
+
+`Show me the recent contracts that are waiting for signatures.`
+
+#### Updating signer details
+
+`Update the signer email on the NDA contract for John Doe to john.doe@acme.com.`
 
 #### Inviting template collaborators
 
-`Invite John Doe to edit the NDA template, email: john@acme.com`
+`Invite John Doe to edit the NDA template. His email is john@acme.com.`
 
 
 ## Install

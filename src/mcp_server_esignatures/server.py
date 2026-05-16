@@ -26,7 +26,7 @@ ESIGNATURES_API_BASE = "https://esignatures.com"
 async def serve() -> Server:
     secret_token = ESIGNATURES_SECRET_TOKEN
     server = Server("mcp-server-esignatures")
-    httpxClient = httpx.AsyncClient(base_url=ESIGNATURES_API_BASE)
+    httpxClient = httpx.AsyncClient(base_url=ESIGNATURES_API_BASE, auth=httpx.BasicAuth(secret_token or "", ""))
 
     @server.list_tools()
     async def handle_list_tools() -> list[types.Tool]:
@@ -115,54 +115,54 @@ async def serve() -> Server:
         name: str, arguments: dict | None
     ) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
         if name == "create_contract":
-            response = await httpxClient.post(f"/api/contracts?token={secret_token}&source=mcpserver", json=arguments)
+            response = await httpxClient.post("/api/contracts?source=mcpserver", json=arguments)
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "query_contract":
-            response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}?token={secret_token}")
+            response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "withdraw_contract":
-            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/withdraw?token={secret_token}")
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/withdraw")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "delete_contract":
-            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/delete?token={secret_token}")
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/delete")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "list_recent_contracts":
-            response = await httpxClient.get(f"/api/contracts/recent?token={secret_token}")
+            response = await httpxClient.get("/api/contracts/recent")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
 
         if name == "create_template":
-            response = await httpxClient.post(f"/api/templates?token={secret_token}", json=arguments)
+            response = await httpxClient.post("/api/templates", json=arguments)
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "query_template":
-            response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}?token={secret_token}")
+            response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "query_template_content":
-            response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}/content?token={secret_token}")
+            response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}/content")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "update_template":
             payload = {k: v for k, v in arguments.items() if k != "template_id"}
-            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}?token={secret_token}", json=payload)
+            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}", json=payload)
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "update_template_content":
             payload = {k: v for k, v in arguments.items() if k != "template_id"}
-            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/content?token={secret_token}", json=payload)
+            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/content", json=payload)
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "delete_template":
-            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/delete?token={secret_token}")
+            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/delete")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "list_templates":
-            response = await httpxClient.get(f"/api/templates?token={secret_token}")
+            response = await httpxClient.get("/api/templates")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
 
         if name == "add_template_collaborator":
             payload = {k: v for k, v in arguments.items() if k != "template_id"}
-            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/collaborators?token={secret_token}", json=payload)
+            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/collaborators", json=payload)
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "remove_template_collaborator":
-            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/collaborators/{arguments.get('template_collaborator_id')}/remove?token={secret_token}")
+            response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/collaborators/{arguments.get('template_collaborator_id')}/remove")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
         if name == "list_template_collaborators":
-            response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}/collaborators?token={secret_token}")
+            response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}/collaborators")
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]
 
         raise ValueError(f"Unknown tool: {name}")

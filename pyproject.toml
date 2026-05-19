@@ -1,6 +1,6 @@
 [project]
 name = "mcp-server-esignatures"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP server for eSignatures (https://esignatures.com)"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -10,8 +10,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/esignaturescom/mcp-server-perplexity"
-Repository = "https://github.com/esignaturescom/mcp-server-perplexity"
+Homepage = "https://github.com/esignaturescom/mcp-server-esignatures"
+Repository = "https://github.com/esignaturescom/mcp-server-esignatures"
 
 [[project.authors]]
 name = "eSignatures"

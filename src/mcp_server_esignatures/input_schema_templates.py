@@ -52,7 +52,7 @@ INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT = {
                     "find_markdown": {"type": "string", "description": " Markdown content to find and replace. Can be an exact snippet or a section heading (e.g. ## Payment Terms). When a heading is provided, the entire section is matched. Leave blank to replace the entire template content."},
                     "replace_with_markdown": {"type": "string", "description": "Markdown content to insert in place of the matched content. Leave blank to remove the matched content."},
                 },
-                "required": ["find_markdown"],
+                "required": ["find_markdown", "replace_with_markdown"],
             },
         },
     },

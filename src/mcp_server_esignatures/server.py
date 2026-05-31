@@ -10,15 +10,8 @@ from mcp.server import NotificationOptions, Server
 import mcp.server.stdio
 
 from .input_schema_contracts import INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_QUERY_CONTRACT, INPUT_SCHEMA_WITHDRAW_CONTRACT, INPUT_SCHEMA_DELETE_CONTRACT, INPUT_SCHEMA_LIST_RECENT_CONTRACTS
-from .input_schema_templates import (
-    INPUT_SCHEMA_CREATE_TEMPLATE,
-    INPUT_SCHEMA_QUERY_TEMPLATE,
-    INPUT_SCHEMA_QUERY_TEMPLATE_CONTENT,
-    INPUT_SCHEMA_UPDATE_TEMPLATE,
-    INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT,
-    INPUT_SCHEMA_DELETE_TEMPLATE,
-    INPUT_SCHEMA_LIST_TEMPLATES,
-)
+from .input_schema_signers import (INPUT_SCHEMA_ADD_CONTRACT_SIGNER, INPUT_SCHEMA_UPDATE_CONTRACT_SIGNER, INPUT_SCHEMA_RESEND_CONTRACT_SIGNER_REQUEST, INPUT_SCHEMA_DELETE_CONTRACT_SIGNER)
+from .input_schema_templates import ( INPUT_SCHEMA_CREATE_TEMPLATE, INPUT_SCHEMA_QUERY_TEMPLATE, INPUT_SCHEMA_QUERY_TEMPLATE_CONTENT, INPUT_SCHEMA_UPDATE_TEMPLATE, INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT, INPUT_SCHEMA_DELETE_TEMPLATE, INPUT_SCHEMA_LIST_TEMPLATES)
 from .input_schema_template_collaborators import INPUT_SCHEMA_ADD_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_REMOVE_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_LIST_TEMPLATE_COLLABORATORS
 
 ESIGNATURES_SECRET_TOKEN = getenv("ESIGNATURES_SECRET_TOKEN")
@@ -58,6 +51,27 @@ async def serve() -> Server:
                 name="list_recent_contracts",
                 description="Returns the details of the latest 100 contracts.",
                 inputSchema=INPUT_SCHEMA_LIST_RECENT_CONTRACTS
+            ),
+
+            types.Tool(
+                name="add_contract_signer",
+                description="Adds a signer to an existing contract. Note: adding a signer does NOT automatically send the contract to them; use resend_contract_signer_request to send it.",
+                inputSchema=INPUT_SCHEMA_ADD_CONTRACT_SIGNER
+            ),
+            types.Tool(
+                name="update_contract_signer",
+                description="Updates the contact details of an existing signer on a contract. Note: the contract is NOT automatically re-sent when the signer is updated.",
+                inputSchema=INPUT_SCHEMA_UPDATE_CONTRACT_SIGNER
+            ),
+            types.Tool(
+                name="resend_contract_signer_request",
+                description="Sends (or resends) the signature request to a specific signer on a contract.",
+                inputSchema=INPUT_SCHEMA_RESEND_CONTRACT_SIGNER_REQUEST
+            ),
+            types.Tool(
+                name="delete_contract_signer",
+                description="Removes a signer from a contract.",
+                inputSchema=INPUT_SCHEMA_DELETE_CONTRACT_SIGNER
             ),
 
             types.Tool(
@@ -129,6 +143,17 @@ async def serve() -> Server:
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/delete")
         elif name == "list_recent_contracts":
             response = await httpxClient.get("/api/contracts/recent")
+
+        elif name == "add_contract_signer":
+            payload = {k: v for k, v in arguments.items() if k != "contract_id"}
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/signers", json=payload)
+        elif name == "update_contract_signer":
+            payload = {k: v for k, v in arguments.items() if k not in ("contract_id", "signer_id")}
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/signers/{arguments.get('signer_id')}", json=payload)
+        elif name == "resend_contract_signer_request":
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/signers/{arguments.get('signer_id')}/send_contract")
+        elif name == "delete_contract_signer":
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/signers/{arguments.get('signer_id')}/delete")
 
         elif name == "create_template":
             response = await httpxClient.post("/api/templates", json=arguments)

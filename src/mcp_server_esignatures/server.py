@@ -11,6 +11,7 @@ import mcp.server.stdio
 
 from .input_schema_contracts import INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_QUERY_CONTRACT, INPUT_SCHEMA_WITHDRAW_CONTRACT, INPUT_SCHEMA_DELETE_CONTRACT, INPUT_SCHEMA_LIST_RECENT_CONTRACTS
 from .input_schema_signers import (INPUT_SCHEMA_ADD_CONTRACT_SIGNER, INPUT_SCHEMA_UPDATE_CONTRACT_SIGNER, INPUT_SCHEMA_RESEND_CONTRACT_SIGNER_REQUEST, INPUT_SCHEMA_DELETE_CONTRACT_SIGNER)
+from .input_schema_placeholder_fields import (INPUT_SCHEMA_QUERY_PLACEHOLDER_FIELDS, INPUT_SCHEMA_UPDATE_PLACEHOLDER_FIELDS)
 from .input_schema_templates import (INPUT_SCHEMA_CREATE_TEMPLATE, INPUT_SCHEMA_QUERY_TEMPLATE, INPUT_SCHEMA_QUERY_TEMPLATE_CONTENT, INPUT_SCHEMA_UPDATE_TEMPLATE, INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT, INPUT_SCHEMA_DELETE_TEMPLATE, INPUT_SCHEMA_LIST_TEMPLATES)
 from .input_schema_template_collaborators import INPUT_SCHEMA_ADD_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_REMOVE_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_LIST_TEMPLATE_COLLABORATORS
 
@@ -72,6 +73,17 @@ async def serve() -> Server:
                 name="delete_contract_signer",
                 description="Removes a signer from a contract.",
                 inputSchema=INPUT_SCHEMA_DELETE_CONTRACT_SIGNER
+            ),
+
+            types.Tool(
+                name="query_contract_placeholder_fields",
+                description="Returns the current values assigned to all Placeholder fields ({{...}}) in a contract. Each value is returned in one of three formats: plain text, Markdown, or a linked template.",
+                inputSchema=INPUT_SCHEMA_QUERY_PLACEHOLDER_FIELDS
+            ),
+            types.Tool(
+                name="update_contract_placeholder_fields",
+                description="Updates Placeholder field values ({{...}}) on an active contract. Only the fields you include will be changed. Each field can be filled with plain text, Markdown content, or the full content of another template.",
+                inputSchema=INPUT_SCHEMA_UPDATE_PLACEHOLDER_FIELDS
             ),
 
             types.Tool(
@@ -154,6 +166,12 @@ async def serve() -> Server:
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/signers/{arguments.get('signer_id')}/send_contract")
         elif name == "delete_contract_signer":
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/signers/{arguments.get('signer_id')}/delete")
+
+        elif name == "query_contract_placeholder_fields":
+            response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}/placeholder_fields")
+        elif name == "update_contract_placeholder_fields":
+            payload = {k: v for k, v in arguments.items() if k != "contract_id"}
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/placeholder_fields", json=payload)
 
         elif name == "create_template":
             response = await httpxClient.post("/api/templates", json=arguments)

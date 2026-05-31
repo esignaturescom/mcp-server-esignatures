@@ -120,7 +120,7 @@ async def serve() -> Server:
         arguments = arguments or {}
 
         if name == "create_contract":
-            response = await httpxClient.post("/api/contracts?source=mcpserver", json=arguments)
+            response = await httpxClient.post("/api/contracts?contract_source=mcpserver", json=arguments)
         elif name == "query_contract":
             response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}")
         elif name == "withdraw_contract":

@@ -114,6 +114,7 @@ async def serve() -> Server:
     async def handle_call_tool(
         name: str, arguments: dict | None
     ) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
+        arguments = arguments or {}
         if name == "create_contract":
             response = await httpxClient.post("/api/contracts?source=mcpserver", json=arguments)
             return [types.TextContent(type="text", text=f"Response code: {response.status_code}, response: {response.json()}")]

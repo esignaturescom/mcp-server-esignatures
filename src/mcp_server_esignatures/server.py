@@ -56,7 +56,7 @@ async def serve() -> Server:
             ),
             types.Tool(
                 name="list_recent_contracts",
-                description="Returns the the details of the latest 100 contracts.",
+                description="Returns the details of the latest 100 contracts.",
                 inputSchema=INPUT_SCHEMA_LIST_RECENT_CONTRACTS
             ),
 
@@ -98,7 +98,7 @@ async def serve() -> Server:
 
             types.Tool(
                 name="add_template_collaborator",
-                description="Creates a HTTPS link for editing a contract template; sends an invitation email if an email is provided..",
+                description="Creates a HTTPS link for editing a contract template; sends an invitation email if an email is provided.",
                 inputSchema=INPUT_SCHEMA_ADD_TEMPLATE_COLLABORATOR
             ),
             types.Tool(

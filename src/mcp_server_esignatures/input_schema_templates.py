@@ -45,11 +45,11 @@ INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT = {
         "template_id": {"type": "string", "description": "GUID of the template whose content should be edited."},
         "edits": {
             "type": "array",
-            "description": "List of Markdown edit operations applied to the template content. Each edit finds existing content and replaces it with new Markdown. ",
+            "description": "List of Markdown edit operations applied to the template content. Each edit finds existing content and replaces it with new Markdown.",
             "items": {
                 "type": "object",
                 "properties": {
-                    "find_markdown": {"type": "string", "description": " Markdown content to find and replace. Can be an exact snippet or a section heading (e.g. ## Payment Terms). When a heading is provided, the entire section is matched. Leave blank to replace the entire template content."},
+                    "find_markdown": {"type": "string", "description": "Markdown content to find and replace. Can be an exact snippet or a section heading (e.g. ## Payment Terms). When a heading is provided, the entire section is matched. Leave blank to replace the entire template content."},
                     "replace_with_markdown": {"type": "string", "description": "Markdown content to insert in place of the matched content. Leave blank to remove the matched content."},
                 },
                 "required": ["find_markdown", "replace_with_markdown"],

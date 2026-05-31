@@ -11,7 +11,7 @@ INPUT_SCHEMA_ADD_TEMPLATE_COLLABORATOR = {
 INPUT_SCHEMA_REMOVE_TEMPLATE_COLLABORATOR = {
     "type": "object",
     "properties": {
-        "template_id": {"type": "string", "description": "Templates's GUID."},
+        "template_id": {"type": "string", "description": "Template's GUID."},
         "template_collaborator_id": {"type": "string", "description": "Collaborator's GUID."}
     },
     "required": ["template_id", "template_collaborator_id"],

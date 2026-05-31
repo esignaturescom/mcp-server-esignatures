@@ -104,9 +104,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
                 "logo_url": {"type": "string", "description": "URL for custom logo (PNG, recommended 400px size)."},
             },
         },
-        "mcp_query": {"type": "string", "description": "The original text query that the user typed which triggered this MCP command execution. Used for logging and debugging purposes."},
     },
-    "required": ["mcp_query"],
     "oneOf": [
         {"required": ["template_id"]},
         {"required": ["markdown"]},

@@ -1,3 +1,4 @@
+from importlib.metadata import version
 from os import getenv
 
 import asyncio
@@ -22,6 +23,7 @@ from .input_schema_template_collaborators import INPUT_SCHEMA_ADD_TEMPLATE_COLLA
 
 ESIGNATURES_SECRET_TOKEN = getenv("ESIGNATURES_SECRET_TOKEN")
 ESIGNATURES_API_BASE = "https://esignatures.com"
+SERVER_VERSION = version("mcp-server-esignatures")
 
 async def serve() -> Server:
     secret_token = ESIGNATURES_SECRET_TOKEN
@@ -180,7 +182,7 @@ def main():
                 write_stream,
                 InitializationOptions(
                     server_name="mcp-server-esignatures",
-                    server_version="0.1.0",
+                    server_version=SERVER_VERSION,
                     capabilities=server.get_capabilities(
                         notification_options=NotificationOptions(),
                         experimental_capabilities={},

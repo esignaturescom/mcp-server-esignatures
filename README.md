@@ -46,6 +46,7 @@ MCP server for eSignatures (https://esignatures.com)
 `Create a contractor agreement for a graphic designer, including payment terms of net 14 days. Prepare it as a draft for review. Signer: John Doe, ACME Corp, john@acme.com.`
 
 #### Adding a signer to a contract
+
 `Add Jane Smith from ACME Corp (jane@acme.com) as a signer on the NDA contract, then send her the signature request.`
 
 #### Editing an existing template

@@ -21,6 +21,9 @@ MCP server for eSignatures (https://esignatures.com)
 | `query_contract_placeholder_fields`  | Placeholders  | Get a contract's placeholder field values        |
 | `update_contract_placeholder_fields` | Placeholders  | Update an unsigned contract's placeholder fields |
 |                                      |               |                                                  |
+| `query_contract_content`             | Content       | Get a contract's content in Markdown format      |
+| `update_contract_content`            | Content       | Edit an active contract's body via find/replace  |
+|                                      |               |                                                  |
 | `create_template`                    | Templates     | Create a new contract template (Markdown body)   |
 | `update_template`                    | Templates     | Update an existing template's title/labels       |
 | `update_template_content`            | Templates     | Edit a template's Markdown body via find/replace |
@@ -51,6 +54,10 @@ MCP server for eSignatures (https://esignatures.com)
 #### Adding a signer to a contract
 
 `Add Jane Smith from ACME Corp (jane@acme.com) as a signer on the NDA contract, then send her the signature request.`
+
+#### Editing an unsigned contract's wording
+
+`On the unsigned NDA, change the rental term to 24 months and remove the jurisdiction section.`
 
 #### Editing an existing template
 

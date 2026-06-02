@@ -9,7 +9,7 @@ MCP server for eSignatures (https://esignatures.com)
 |--------------------------------------|---------------|--------------------------------------------------|
 | `create_contract`                    | Contracts     | Draft for review or send contract                |
 | `query_contract`                     | Contracts     | Retrieve contract info                           |
-| `withdraw_contract`                  | Contracts     | Withdraw an unsigned contract                    |
+| `withdraw_contract`                  | Contracts     | Withdraw an active contract                      |
 | `delete_contract`                    | Contracts     | Delete a draft or test contract                  |
 | `list_recent_contracts`              | Contracts     | List the recent contracts                        |
 |                                      |               |                                                  |
@@ -19,7 +19,7 @@ MCP server for eSignatures (https://esignatures.com)
 | `delete_contract_signer`             | Signers       | Remove a signer from a contract                  |
 |                                      |               |                                                  |
 | `query_contract_placeholder_fields`  | Placeholders  | Get a contract's placeholder field values        |
-| `update_contract_placeholder_fields` | Placeholders  | Update an unsigned contract's placeholder fields |
+| `update_contract_placeholder_fields` | Placeholders  | Update an active contract's placeholder fields   |
 |                                      |               |                                                  |
 | `query_contract_content`             | Content       | Get a contract's content in Markdown format      |
 | `update_contract_content`            | Content       | Edit an active contract's body via find/replace  |
@@ -55,9 +55,9 @@ MCP server for eSignatures (https://esignatures.com)
 
 `Add Jane Smith from ACME Corp (jane@acme.com) as a signer on the NDA contract, then send her the signature request.`
 
-#### Editing an unsigned contract's wording
+#### Editing an active contract's wording
 
-`On the unsigned NDA, change the rental term to 24 months and remove the jurisdiction section.`
+`On the NDA, change the rental term to 24 months and remove the jurisdiction section.`
 
 #### Editing an existing template
 

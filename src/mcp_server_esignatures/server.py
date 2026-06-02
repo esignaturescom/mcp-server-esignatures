@@ -110,7 +110,7 @@ async def serve() -> Server:
             ),
             types.Tool(
                 name="update_template_content",
-                description="Edits a template's Markdown content by applying an ordered list of find/replace operations. Each `edits` entry replaces the first match of `find_markdown` (a Markdown snippet or just a header line like '## Section') with `replace_with_markdown`; set `replace_with_markdown` to an empty string to delete the matched content.",
+                description="Edits a template's Markdown content by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`.",
                 inputSchema=INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT
             ),
             types.Tool(

@@ -49,7 +49,7 @@ INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "find_markdown": {"type": "string", "description": "Markdown content to find and replace. Can be an exact snippet or a section heading (e.g. ## Payment Terms). When a heading is provided, the entire section is matched. Leave blank to replace the entire template content."},
+                    "find_markdown": {"type": "string", "description": "Markdown content to find. By default this matches text literally, including line breaks, so all occurrences of the exact text you provide are replaced (e.g. every 'including weekends' becomes the replacement). As a special case, if the value is exactly a heading followed by a trailing newline (e.g. '## Payment Terms\n'), the match expands to that heading plus all content beneath it up to the next heading, replacing the whole section. Set to blank ('') to replace the entire content."},
                     "replace_with_markdown": {"type": "string", "description": "Markdown content to insert in place of the matched content. Leave blank to remove the matched content."},
                 },
                 "required": ["find_markdown", "replace_with_markdown"],

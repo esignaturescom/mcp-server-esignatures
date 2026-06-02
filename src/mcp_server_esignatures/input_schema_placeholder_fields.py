@@ -11,7 +11,7 @@ INPUT_SCHEMA_QUERY_PLACEHOLDER_FIELDS = {
 INPUT_SCHEMA_UPDATE_PLACEHOLDER_FIELDS = {
     "type": "object",
     "properties": {
-        "contract_id": {"type": "string", "description": "GUID of the contract to update. The contract must be unsigned."},
+        "contract_id": {"type": "string", "description": "GUID of the contract to update. The contract must be active."},
         "placeholder_fields": {
             "type": "array",
             "description": "Placeholder fields to update on the contract. Only the fields included here are changed; omitted fields are left untouched. Each field can be replaced with plain text, Markdown content, or the full content of one of your templates.",

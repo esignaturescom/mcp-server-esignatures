@@ -9,7 +9,7 @@ INPUT_SCHEMA_QUERY_CONTRACT_CONTENT = {
 INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT = {
     "type": "object",
     "properties": {
-        "contract_id": {"type": "string", "description": "GUID of the contract whose content should be edited. The contract must be unsigned."},
+        "contract_id": {"type": "string", "description": "GUID of the contract whose content should be edited. The contract must be active."},
         "edits": {
             "type": "array",
             "description": "List of Markdown edit operations applied to the contract content. Each edit finds existing content and replaces it with new Markdown.",

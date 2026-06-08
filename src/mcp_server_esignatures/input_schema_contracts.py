@@ -57,7 +57,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
         },
         "placeholder_fields": {
             "type": "array",
-            "description": "Replaces text placeholders in the template when creating a contract. Example: {{interest_rate}}. Do not add placeholder values when creating a draft.",
+            "description": "Replaces text placeholders in the template when creating a contract. Example: {{interest_rate}}.",
             "items": {
                 "type": "object",
                 "properties": {

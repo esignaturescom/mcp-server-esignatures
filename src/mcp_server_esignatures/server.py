@@ -22,7 +22,7 @@ SERVER_VERSION = version("mcp-server-esignatures")
 
 async def serve() -> Server:
     secret_token = ESIGNATURES_SECRET_TOKEN
-    if not secret_token: raise RuntimeError("ESIGNATURES_SECRET_TOKEN is not set. Set it to your eSignatures API secret token before starting the server.")
+    if not secret_token: raise RuntimeError("ESIGNATURES_SECRET_TOKEN is not set. Set it to your eSignatures.com API secret token before starting the server.")
     server = Server("mcp-server-esignatures")
     httpxClient = httpx.AsyncClient(base_url=ESIGNATURES_API_BASE, auth=httpx.BasicAuth(secret_token or "", ""))
 

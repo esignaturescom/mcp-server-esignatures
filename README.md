@@ -1,6 +1,20 @@
-# mcp-server-esignatures MCP server
+# mcp-server-esignatures
 
-MCP server for eSignatures (https://esignatures.com)
+**The most developer- and AI-friendly electronic signature platform.**
+
+Traditional eSignature tools lock you into rigid, static PDF files.
+**eSignatures.com** takes a different approach — contracts remain **fully editable, Markdown-based content** throughout their entire lifecycle, making them effortless for developers, automation systems, and AI agents to create, understand, modify, and manage.
+
+This MCP server gives AI agents (such as Claude) real-time access to the complete eSignatures API, enabling:
+
+* Dynamic contract creation and editing — even after sending
+* Markdown-based content that AI can generate, understand, and update
+* End-to-end workflows: drafting → placeholder filling → sending → signing → amendments
+* Flexible templates and reusable contract workflows
+* Signer management, notifications, and lifecycle automation
+
+Built for intelligent, adaptive contract workflows — not outdated PDF-based signing.
+
 
 ## Tools
 
@@ -86,9 +100,9 @@ MCP server for eSignatures (https://esignatures.com)
 
 ## Install
 
-### Create an eSignatures account
+### Create an eSignatures.com account
 
-Create an eSignatures account at https://esignatures.com for free, to test the Agent AI by creating templates and sending test contracts.
+Create an eSignatures.com account at https://esignatures.com for free, to test the Agent AI by creating templates and sending test contracts.
 
 ### Claude Desktop
 
@@ -130,13 +144,13 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
 ### Authentication
 
-To use this server, you need to set the `ESIGNATURES_SECRET_TOKEN` environment variable with your eSignatures API secret token.
+To use this server, you need to set the `ESIGNATURES_SECRET_TOKEN` environment variable with your eSignatures.com API secret token.
 
-## eSignatures API Documentation
+## eSignatures.com API Documentation
 
-For a detailed guide on API endpoints, parameters, and responses, see [eSignatures API](https://esignatures.com/docs/api).
+For a detailed guide on API endpoints, parameters, and responses, see [eSignatures.com API](https://esignatures.com/docs/api).
 
-## eSignatures Support
+## eSignatures.com Support
 
 For support, please navigate to [Support](https://esignatures.com/support) or contact [support@esignatures.com](mailto:support@esignatures.com).
 

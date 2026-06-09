@@ -1,5 +1,5 @@
 MARKDOWN_CONTENT_DESCRIPTION = """\
-Document body in eSignatures Markdown. Use standard CommonMark for headers,
+Document body in eSignatures.com Markdown. Use standard CommonMark for headers,
 paragraphs, bold (**bold**), italic (*italic*), ordered/unordered lists,
 tables, and images. Add Signer fields, line alignment, header counters, etc.
 via the *extended syntax*: an optional JSON config in backticks appended to

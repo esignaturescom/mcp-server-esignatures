@@ -3,7 +3,7 @@ from .input_schema_markdown import MARKDOWN_CONTENT_DESCRIPTION
 INPUT_SCHEMA_CREATE_CONTRACT = {
     "type": "object",
     "properties": {
-        "template_id": {"type": "string", "description": "GUID of a contract template within eSignatures. The template provides content, title, and labels. Provide either template_id or markdown for the content, not both."},
+        "template_id": {"type": "string", "description": "GUID of a contract template within eSignatures.com. The template provides content, title, and labels. Provide either template_id or markdown for the content, not both."},
         "markdown": {
             "type": "string",
             "description": "Ad-hoc contract body, used to create a contract WITHOUT a template. Provide either template_id or markdown, not both. " + MARKDOWN_CONTENT_DESCRIPTION,
@@ -11,9 +11,9 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
         "title": {"type": "string", "description": "Sets the contract's title, which appears as the first line in contracts and PDF files, in email subjects, and overrides the template's title. Recommended when using the `markdown` parameter, as there is no template title to fall back on."},
         "locale": {"type": "string", "description": "Language for signer page and emails.", "enum": ["cz", "da", "de", "el", "en", "en-GB", "es", "fi", "fr", "hr", "hu", "id", "it", "ja", "nl", "no", "pl", "pt", "ro", "rs", "sk", "sl", "sv", "vi", "zh-CN"]},
         "metadata": {"type": "string", "description": "Custom data for contract owners and webhook notifications; e.g. internal IDs."},
-        "expires_in_hours": {"type": "string", "description": "Sets contract expiry time in hours; expired contracts can't be signed. Expiry period can be extended per contract in eSignatures."},
-        "custom_webhook_url": {"type": "string", "description": "Overrides default webhook HTTPS URL for this contract, defined on the API page in eSignatures. Retries 6 times with 1 hour delays, timeout is 20 seconds."},
-        "assigned_user_email": {"type": "string", "description": "Assigns an eSignatures user as contract owner with edit/view/send rights and notification settings. Contract owners get email notifications for signings and full contract completion if enabled on their Profile."},
+        "expires_in_hours": {"type": "string", "description": "Sets contract expiry time in hours; expired contracts can't be signed. Expiry period can be extended per contract in eSignatures.com."},
+        "custom_webhook_url": {"type": "string", "description": "Overrides default webhook HTTPS URL for this contract, defined on the API page in eSignatures.com. Retries 6 times with 1 hour delays, timeout is 20 seconds."},
+        "assigned_user_email": {"type": "string", "description": "Assigns an eSignatures.com user as contract owner with edit/view/send rights and notification settings. Contract owners get email notifications for signings and full contract completion if enabled on their Profile."},
         "labels": {"type": "array", "description": "Assigns labels to the contract, overriding template labels. Labels assist in organizing contracts without using folders.", "items": {"type": "string"}},
         "test": {"type": "string", "description": "Marks contract as 'demo' with no fees; adds DEMO stamp, disables reminders.", "enum": ["yes", "no"]},
         "save_as_draft": {"type": "string", "description": "Saves contract as draft for further editing; draft can be edited and sent via UI. URL: https://esignatures.com/contracts/contract_id/edit, where contract_id is in the API response.", "enum": ["yes", "no"]},

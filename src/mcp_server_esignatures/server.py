@@ -94,7 +94,7 @@ async def serve() -> Server:
             ),
             types.Tool(
                 name="update_contract_content",
-                description="Edits Markdown content of an active contract by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`.",
+                description="Edits Markdown content of an active contract by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`. The response includes the updated content.",
                 inputSchema=INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT
             ),
 
@@ -110,7 +110,7 @@ async def serve() -> Server:
             ),
             types.Tool(
                 name="update_template_content",
-                description="Edits a template's Markdown content by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`.",
+                description="Edits a template's Markdown content by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`. The response includes the updated content.",
                 inputSchema=INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT
             ),
             types.Tool(

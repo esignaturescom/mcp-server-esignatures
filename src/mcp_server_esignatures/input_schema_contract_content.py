@@ -10,6 +10,11 @@ INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT = {
     "type": "object",
     "properties": {
         "contract_id": {"type": "string", "description": "GUID of the contract whose content should be edited. The contract must be active."},
+        "dry_run": {
+            "type": "string",
+            "enum": ["yes", "no"],
+            "description": "When 'yes', returns the content as it would appear after edits, without saving."
+        },
         "edits": {
             "type": "array",
             "description": "List of Markdown edit operations applied to the contract content. Each edit finds existing content and replaces it with new Markdown.",

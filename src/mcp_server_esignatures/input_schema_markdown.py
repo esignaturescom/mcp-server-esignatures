@@ -23,7 +23,7 @@ Example:
 
   Parent name `{"line_type": "text-input", "input_type": "only_first_signer", "input_required": "yes", "signer_field_id": "parent-name"}`
 
-  Preferred device `{"line_type": "select-input", "input_type": "only_first_signer", "select_values": ["Desktop", "Tablet", "Mobile"]}`
+  Preferred device `{"line_type": "select-input", "input_type": "only_first_signer", "select_values": "Desktop\nTablet\nMobile"}`
 
   I accept the privacy policy `{"line_type": "checkbox", "input_type": "every_signer", "input_required": "yes"}`
 
@@ -52,8 +52,8 @@ Extended-syntax config keys (all optional unless noted):
     pre-tick), `radiobutton`. Use `YYYY-MM-DD` for dates.
   - placeholder_text: hint text shown in the field background guiding the
     signer on what to enter. Applicable to `text-input`.
-  - select_values: list of dropdown options, e.g.
-    ["Desktop", "Tablet", "Mobile"]. Applicable to `select-input`.
+  - select_values: string containing dropdown options separated by newlines (`\n`), e.g.
+    "Desktop\nTablet\nMobile". Applicable to `select-input`.
   - masked: `yes` or `no`. When `yes`, the value the signer enters is hidden
     from other signers and masked in the final PDF. Applicable to
     `text-input`.

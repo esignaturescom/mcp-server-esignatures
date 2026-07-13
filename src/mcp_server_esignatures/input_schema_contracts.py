@@ -114,7 +114,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
 INPUT_SCHEMA_QUERY_CONTRACT = {
     "type": "object",
     "properties": {
-        "contract_id": {"type": "string", "description": "GUID of the contract (draft contracts can't be queried, only sent contracts)."},
+        "contract_id": {"type": "string", "description": "GUID of the contract."},
     },
     "required": ["contract_id"],
 }

@@ -9,7 +9,7 @@ import mcp.types as types
 from mcp.server import NotificationOptions, Server
 import mcp.server.stdio
 
-from .input_schema_contracts import INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_QUERY_CONTRACT, INPUT_SCHEMA_WITHDRAW_CONTRACT, INPUT_SCHEMA_DELETE_CONTRACT, INPUT_SCHEMA_LIST_RECENT_CONTRACTS
+from .input_schema_contracts import INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_QUERY_CONTRACT, INPUT_SCHEMA_SEND_DRAFT_CONTRACT, INPUT_SCHEMA_WITHDRAW_CONTRACT, INPUT_SCHEMA_DELETE_CONTRACT, INPUT_SCHEMA_LIST_RECENT_CONTRACTS
 from .input_schema_signers import (INPUT_SCHEMA_ADD_CONTRACT_SIGNER, INPUT_SCHEMA_UPDATE_CONTRACT_SIGNER, INPUT_SCHEMA_RESEND_CONTRACT_SIGNER_REQUEST, INPUT_SCHEMA_DELETE_CONTRACT_SIGNER)
 from .input_schema_placeholder_fields import (INPUT_SCHEMA_QUERY_PLACEHOLDER_FIELDS, INPUT_SCHEMA_UPDATE_PLACEHOLDER_FIELDS)
 from .input_schema_contract_content import (INPUT_SCHEMA_QUERY_CONTRACT_CONTENT, INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT)
@@ -38,6 +38,11 @@ async def serve() -> Server:
                 name="query_contract",
                 description="Responds with the contract details, contract_id, status, final PDF url if present, title, labels, metadata, expiry time if present, and signer details with all signer events (signer events are included only for recent contracts, with rate limiting).",
                 inputSchema=INPUT_SCHEMA_QUERY_CONTRACT
+            ),
+            types.Tool(
+                name="send_draft_contract",
+                description="Sends a draft contract to its signers to collect signatures. Only applicable to contracts with a status of 'draft' — contracts created without save_as_draft are already sent, so this isn't needed for those.",
+                inputSchema=INPUT_SCHEMA_SEND_DRAFT_CONTRACT
             ),
             types.Tool(
                 name="withdraw_contract",
@@ -161,6 +166,8 @@ async def serve() -> Server:
             response = await httpxClient.post("/api/contracts?contract_source=mcpserver", json=arguments)
         elif name == "query_contract":
             response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}")
+        elif name == "send_draft_contract":
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/send_draft")
         elif name == "withdraw_contract":
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/withdraw")
         elif name == "delete_contract":

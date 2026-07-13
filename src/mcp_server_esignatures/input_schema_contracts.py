@@ -119,6 +119,14 @@ INPUT_SCHEMA_QUERY_CONTRACT = {
     "required": ["contract_id"],
 }
 
+INPUT_SCHEMA_SEND_DRAFT_CONTRACT = {
+    "type": "object",
+    "properties": {
+        "contract_id": {"type": "string", "description": "GUID of the draft contract to send to its signers."},
+    },
+    "required": ["contract_id"],
+}
+
 INPUT_SCHEMA_WITHDRAW_CONTRACT = {
     "type": "object",
     "properties": {

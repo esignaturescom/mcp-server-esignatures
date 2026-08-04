@@ -16,6 +16,8 @@ This MCP server gives AI agents (such as Claude) real-time access to the complet
 Built for intelligent, adaptive contract workflows — not outdated PDF-based signing.
 
 
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/esignaturescom/mcp-server-esignatures)](https://archestra.ai/mcp-catalog/esignaturescom__mcp-server-esignatures)
+
 ## Tools
 
 

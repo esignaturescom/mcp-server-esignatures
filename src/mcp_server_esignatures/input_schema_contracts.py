@@ -16,7 +16,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
         "assigned_user_email": {"type": "string", "description": "Assigns an eSignatures.com user as contract owner with edit/view/send rights and notification settings. Contract owners get email notifications for signings and full contract completion if enabled on their Profile."},
         "labels": {"type": "array", "description": "Assigns labels to the contract, overriding template labels. Labels assist in organizing contracts without using folders.", "items": {"type": "string"}},
         "test": {"type": "string", "description": "Marks contract as 'demo' with no fees; adds DEMO stamp, disables reminders.", "enum": ["yes", "no"]},
-        "save_as_draft": {"type": "string", "description": "Saves contract as draft for further editing; draft can be edited and sent via UI. URL: https://esignatures.com/contracts/contract_id/edit, where contract_id is in the API response.", "enum": ["yes", "no"]},
+        "save_as_draft": {"type": "string", "description": "Saves contract as draft for further editing; draft can be reviewed, edited and sent via UI.", "enum": ["yes", "no"]},
         "signers": {
             "type": "array",
             "description": "List of individuals required to sign the contract. Only include specific persons with their contact details; do not add generic signers.",
@@ -57,7 +57,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
         },
         "placeholder_fields": {
             "type": "array",
-            "description": "Replaces text placeholders in the template when creating a contract. Example: {{interest_rate}}.",
+            "description": "Values for the placeholder fields (e.g., {{interest_rate}}). Stored separately from the contract content and rendered when the signer views the contract — not merged in at creation time. Can be updated any time before the contract is signed.",
             "items": {
                 "type": "object",
                 "properties": {
@@ -79,7 +79,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
                 "type": "object",
                 "properties": {
                     "signer_field_id": {"type": "string", "description": "Signer field ID of the given Signer field in the content."},
-                    "default_value": {"type": "string", "description": "Default input value (use '1' for checkboxes and radio buttons, 'YYYY-mm-dd' for dates)."},
+                    "default_value": {"type": "string", "description": "Default input value (use 'yes' for checkboxes and radio buttons, 'YYYY-mm-dd' for dates)."},
                 },
                 "required": ["signer_field_id"],
             },
@@ -145,6 +145,8 @@ INPUT_SCHEMA_DELETE_CONTRACT = {
 
 INPUT_SCHEMA_LIST_RECENT_CONTRACTS = {
     "type": "object",
-    "properties": {},
+    "properties": {
+        "page": {"type": "integer", "minimum": 1, "maximum": 10, "description": "Page number, 1-based. Each page returns up to 100 contracts. Defaults to 1, max 10."},
+    },
     "required": [],
 }

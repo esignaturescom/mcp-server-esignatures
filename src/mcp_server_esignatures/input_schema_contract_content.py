@@ -2,6 +2,7 @@ INPUT_SCHEMA_QUERY_CONTRACT_CONTENT = {
     "type": "object",
     "properties": {
         "contract_id": {"type": "string", "description": "GUID of the contract whose Markdown content should be returned."},
+        "version_id": {"type": "string", "description": "Optional. Version ID of a historical content version to return, as previously returned by query_contract_content or update_contract_content. Omit to get the latest version."},
     },
     "required": ["contract_id"],
 }
@@ -9,7 +10,7 @@ INPUT_SCHEMA_QUERY_CONTRACT_CONTENT = {
 INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT = {
     "type": "object",
     "properties": {
-        "contract_id": {"type": "string", "description": "GUID of the contract whose content should be edited. The contract must be active."},
+        "contract_id": {"type": "string", "description": "GUID of the contract whose content should be edited."},
         "dry_run": {
             "type": "string",
             "enum": ["yes", "no"],

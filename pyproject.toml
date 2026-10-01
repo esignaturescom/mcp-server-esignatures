@@ -1,11 +1,12 @@
 [project]
 name = "mcp-server-esignatures"
-version = "0.2.0"
+version = "0.3.0"
 description = "MCP server for eSignatures (https://esignatures.com)"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
- "mcp>=1.2.0",
+ "mcp>=1.2.0,<2",
+ "httpx>=0.27",
  "twine>=6.1.0",
 ]
 

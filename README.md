@@ -11,6 +11,7 @@ This MCP server gives AI agents (such as Claude) real-time access to the complet
 * Markdown-based content that AI can generate, understand, and update
 * End-to-end workflows: drafting → placeholder filling → sending → signing → amendments
 * Flexible templates and reusable contract workflows
+* Contract links: reusable public signing URLs for waivers, NDAs and onboarding forms
 * Signer management, notifications, and lifecycle automation
 
 Built for intelligent, adaptive contract workflows — not outdated PDF-based signing.
@@ -19,36 +20,45 @@ Built for intelligent, adaptive contract workflows — not outdated PDF-based si
 ## Tools
 
 
-| Tool                                 | Category      | Description                                      |
-|--------------------------------------|---------------|--------------------------------------------------|
-| `create_contract`                    | Contracts     | Draft for review or send contract                |
-| `query_contract`                     | Contracts     | Retrieve contract info                           |
-| `withdraw_contract`                  | Contracts     | Withdraw an active contract                      |
-| `delete_contract`                    | Contracts     | Delete a draft or test contract                  |
-| `list_recent_contracts`              | Contracts     | List the recent contracts                        |
-|                                      |               |                                                  |
-| `add_contract_signer`                | Signers       | Add a signer to an existing contract             |
-| `update_contract_signer`             | Signers       | Update an existing signer's contact details      |
-| `resend_contract_signer_request`     | Signers       | Send or resend the sign request to a signer      |
-| `delete_contract_signer`             | Signers       | Remove a signer from a contract                  |
-|                                      |               |                                                  |
-| `query_contract_placeholder_fields`  | Placeholders  | Get a contract's placeholder field values        |
-| `update_contract_placeholder_fields` | Placeholders  | Update an active contract's placeholder fields   |
-|                                      |               |                                                  |
-| `query_contract_content`             | Content       | Get a contract's content in Markdown format      |
-| `update_contract_content`            | Content       | Edit an active contract's body via find/replace  |
-|                                      |               |                                                  |
-| `create_template`                    | Templates     | Create a new contract template (Markdown body)   |
-| `update_template`                    | Templates     | Update an existing template's title/labels       |
-| `update_template_content`            | Templates     | Edit a template's Markdown body via find/replace |
-| `query_template`                     | Templates     | Retrieve template metadata                       |
-| `query_template_content`             | Templates     | Retrieve a template's Markdown body              |
-| `delete_template`                    | Templates     | Delete a template                                |
-| `list_templates`                     | Templates     | List all your templates                          |
-|                                      |               |                                                  |
-| `add_template_collaborator`          | Collaborators | Invite someone to edit a template                |
-| `remove_template_collaborator`       | Collaborators | Revoke template editing rights                   |
-| `list_template_collaborators`        | Collaborators | View who can edit a template                     |
+| Tool                                 | Category       | Description                                           |
+|--------------------------------------|----------------|-------------------------------------------------------|
+| `create_contract`                    | Contracts      | Draft for review or send contract                     |
+| `query_contract`                     | Contracts      | Retrieve contract info                                |
+| `send_draft_contract`                | Contracts      | Send a draft contract to its signers                  |
+| `withdraw_contract`                  | Contracts      | Withdraw an active contract                           |
+| `delete_contract`                    | Contracts      | Delete a draft or test contract                       |
+| `list_recent_contracts`              | Contracts      | List recent contracts, 100 per page                   |
+|                                      |                |                                                       |
+| `add_contract_signer`                | Signers        | Add a signer to an existing contract                  |
+| `update_contract_signer`             | Signers        | Update an existing signer's contact details           |
+| `resend_contract_signer_request`     | Signers        | Send or resend the sign request to a signer           |
+| `delete_contract_signer`             | Signers        | Remove a signer from a contract                       |
+|                                      |                |                                                       |
+| `query_contract_placeholder_fields`  | Placeholders   | Get a contract's placeholder field values             |
+| `update_contract_placeholder_fields` | Placeholders   | Update an active contract's placeholder fields        |
+|                                      |                |                                                       |
+| `query_contract_content`             | Content        | Get a contract's Markdown content, or a past version  |
+| `update_contract_content`            | Content        | Edit a draft or active contract's body via find/replace |
+|                                      |                |                                                       |
+| `create_template`                    | Templates      | Create a new contract template (Markdown body)        |
+| `update_template`                    | Templates      | Update an existing template's title/labels            |
+| `update_template_content`            | Templates      | Edit a template's Markdown body via find/replace      |
+| `query_template`                     | Templates      | Retrieve template metadata                            |
+| `query_template_content`             | Templates      | Retrieve a template's Markdown body                   |
+| `delete_template`                    | Templates      | Delete a template                                     |
+| `list_templates`                     | Templates      | List all your templates                               |
+|                                      |                |                                                       |
+| `add_template_collaborator`          | Collaborators  | Invite someone to edit a template                     |
+| `remove_template_collaborator`       | Collaborators  | Revoke template editing rights                        |
+| `list_template_collaborators`        | Collaborators  | View who can edit a template                          |
+|                                      |                |                                                       |
+| `create_contract_link`               | Contract links | Create a reusable public signing URL                  |
+| `query_contract_link`                | Contract links | Retrieve a Contract link's settings and URL           |
+| `query_contract_link_content`        | Contract links | Retrieve a Contract link's Markdown body              |
+| `update_contract_link`               | Contract links | Update a Contract link's settings                     |
+| `update_contract_link_content`       | Contract links | Edit a Contract link's Markdown body via find/replace |
+| `delete_contract_link`               | Contract links | Delete a Contract link                                |
+| `list_contract_links`                | Contract links | List all your Contract links                          |
 
 
 ## Examples
@@ -96,6 +106,14 @@ Built for intelligent, adaptive contract workflows — not outdated PDF-based si
 #### Inviting template collaborators
 
 `Invite John Doe to edit the NDA template. His email is john@acme.com.`
+
+#### Creating a Contract link
+
+`Create a Contract link for a gym liability waiver, with SMS verification, that I can share as a QR code at reception.`
+
+#### Updating a Contract link
+
+`On the waiver Contract link, add a photo release clause and CC signed copies to front-desk@acme.com.`
 
 
 ## Install

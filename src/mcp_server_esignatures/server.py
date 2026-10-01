@@ -15,6 +15,7 @@ from .input_schema_placeholder_fields import (INPUT_SCHEMA_QUERY_PLACEHOLDER_FIE
 from .input_schema_contract_content import (INPUT_SCHEMA_QUERY_CONTRACT_CONTENT, INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT)
 from .input_schema_templates import (INPUT_SCHEMA_CREATE_TEMPLATE, INPUT_SCHEMA_QUERY_TEMPLATE, INPUT_SCHEMA_QUERY_TEMPLATE_CONTENT, INPUT_SCHEMA_UPDATE_TEMPLATE, INPUT_SCHEMA_UPDATE_TEMPLATE_CONTENT, INPUT_SCHEMA_DELETE_TEMPLATE, INPUT_SCHEMA_LIST_TEMPLATES)
 from .input_schema_template_collaborators import INPUT_SCHEMA_ADD_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_REMOVE_TEMPLATE_COLLABORATOR, INPUT_SCHEMA_LIST_TEMPLATE_COLLABORATORS
+from .input_schema_contract_links import (INPUT_SCHEMA_CREATE_CONTRACT_LINK, INPUT_SCHEMA_QUERY_CONTRACT_LINK, INPUT_SCHEMA_QUERY_CONTRACT_LINK_CONTENT, INPUT_SCHEMA_UPDATE_CONTRACT_LINK, INPUT_SCHEMA_UPDATE_CONTRACT_LINK_CONTENT, INPUT_SCHEMA_DELETE_CONTRACT_LINK, INPUT_SCHEMA_LIST_CONTRACT_LINKS)
 
 ESIGNATURES_SECRET_TOKEN = getenv("ESIGNATURES_SECRET_TOKEN")
 ESIGNATURES_API_BASE = "https://esignatures.com"
@@ -31,7 +32,7 @@ async def serve() -> Server:
         return [
             types.Tool(
                 name="create_contract",
-                description="Creates a new contract, either from a template (via template_id) or from ad-hoc content (via the markdown parameter, with no template needed). Exactly one of template_id or markdown must be provided. The contract can be a draft which the user can customize/send, or the contract can be sent instantly. So called 'signature fields' like Name/Date/signature-line must be left out, they are all handled automatically. Contract owners can customize template content by replacing {{placeholder fields}} inside the content (via placeholder_fields), and the signers can fill in Signer fields when they sign the contract.",
+                description="Creates and sends a new contract. Unless save_as_draft is 'yes', the contract is sent to the signers immediately — if a review is required first, create a draft instead, which the user can then review, customize, and send from the eSignatures.com UI. Content comes either from the template_id parameter or the markdown parameter. Contract owners can customize template content by replacing {{placeholder fields}} via the placeholder_fields parameter.",
                 inputSchema=INPUT_SCHEMA_CREATE_CONTRACT
             ),
             types.Tool(
@@ -56,7 +57,7 @@ async def serve() -> Server:
             ),
             types.Tool(
                 name="list_recent_contracts",
-                description="Returns the details of the latest 100 contracts.",
+                description="Returns the details of the latest contracts, 100 per page, newest first. Use the page parameter to fetch older contracts.",
                 inputSchema=INPUT_SCHEMA_LIST_RECENT_CONTRACTS
             ),
 
@@ -99,7 +100,7 @@ async def serve() -> Server:
             ),
             types.Tool(
                 name="update_contract_content",
-                description="Edits Markdown content of an active contract by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`. The response includes the updated content.",
+                description="Edits Markdown content of a draft or active contract by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`. The response includes the updated content.",
                 inputSchema=INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT
             ),
 
@@ -153,6 +154,42 @@ async def serve() -> Server:
                 name="list_template_collaborators",
                 description="Returns the list of template collaborators, including their GUID, name, email, and the HTTPS link for editing the template",
                 inputSchema=INPUT_SCHEMA_LIST_TEMPLATE_COLLABORATORS
+            ),
+
+            types.Tool(
+                name="create_contract_link",
+                description="Creates a new Contract link: a reusable public signing URL where anyone can review and sign the same document, and each signing creates a separate contract. Recommend this instead of create_contract when the signers aren't known in advance or many people sign the same agreement without customization — e.g. waivers and consent forms, NDAs, membership or onboarding agreements, standard service agreements. The link is very versatile, it can be shared in emails, embedded into websites as hyperlinks or buttons, or displayed as a QR code on printed materials.",
+                inputSchema=INPUT_SCHEMA_CREATE_CONTRACT_LINK
+            ),
+            types.Tool(
+                name="query_contract_link",
+                description="Responds with the Contract link details: contract_link_id, public signing URL, title, verification method, redirect URL, thank you message, CC email addresses, second signer settings, and published status. Use query_contract_link_content to fetch the Markdown body.",
+                inputSchema=INPUT_SCHEMA_QUERY_CONTRACT_LINK
+            ),
+            types.Tool(
+                name="query_contract_link_content",
+                description="Returns the Markdown content (body) of a Contract link.",
+                inputSchema=INPUT_SCHEMA_QUERY_CONTRACT_LINK_CONTENT
+            ),
+            types.Tool(
+                name="update_contract_link",
+                description="Updates a Contract link's settings. Only the parameters included are changed; omitted parameters are left unchanged. Use update_contract_link_content to edit the body.",
+                inputSchema=INPUT_SCHEMA_UPDATE_CONTRACT_LINK
+            ),
+            types.Tool(
+                name="update_contract_link_content",
+                description="Edits a Contract link's Markdown content by applying an ordered list of find/replace operations. Each `edits` entry replaces the exact matches of `find_markdown` with `replace_with_markdown`. Contracts already signed via the link are not affected. The response includes the updated content.",
+                inputSchema=INPUT_SCHEMA_UPDATE_CONTRACT_LINK_CONTENT
+            ),
+            types.Tool(
+                name="delete_contract_link",
+                description="Deletes a Contract link. The public signing URL stops working; contracts already signed via the link are not affected.",
+                inputSchema=INPUT_SCHEMA_DELETE_CONTRACT_LINK
+            ),
+            types.Tool(
+                name="list_contract_links",
+                description="Lists the Contract links, including their public signing URLs and published status.",
+                inputSchema=INPUT_SCHEMA_LIST_CONTRACT_LINKS
             )
         ]
 
@@ -173,7 +210,8 @@ async def serve() -> Server:
         elif name == "delete_contract":
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/delete")
         elif name == "list_recent_contracts":
-            response = await httpxClient.get("/api/contracts/recent")
+            params = {"page": arguments["page"]} if arguments.get("page") else None
+            response = await httpxClient.get("/api/contracts/recent", params=params)
 
         elif name == "add_contract_signer":
             payload = {k: v for k, v in arguments.items() if k != "contract_id"}
@@ -193,7 +231,8 @@ async def serve() -> Server:
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/placeholder_fields", json=payload)
 
         elif name == "query_contract_content":
-            response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}/content")
+            params = {"version_id": arguments["version_id"]} if arguments.get("version_id") else None
+            response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}/content", params=params)
         elif name == "update_contract_content":
             payload = {k: v for k, v in arguments.items() if k != "contract_id"}
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/content", json=payload)
@@ -222,6 +261,23 @@ async def serve() -> Server:
             response = await httpxClient.post(f"/api/templates/{arguments.get('template_id')}/collaborators/{arguments.get('template_collaborator_id')}/remove")
         elif name == "list_template_collaborators":
             response = await httpxClient.get(f"/api/templates/{arguments.get('template_id')}/collaborators")
+
+        elif name == "create_contract_link":
+            response = await httpxClient.post("/api/contract_links", json=arguments)
+        elif name == "query_contract_link":
+            response = await httpxClient.get(f"/api/contract_links/{arguments.get('contract_link_id')}")
+        elif name == "query_contract_link_content":
+            response = await httpxClient.get(f"/api/contract_links/{arguments.get('contract_link_id')}/content")
+        elif name == "update_contract_link":
+            payload = {k: v for k, v in arguments.items() if k != "contract_link_id"}
+            response = await httpxClient.post(f"/api/contract_links/{arguments.get('contract_link_id')}", json=payload)
+        elif name == "update_contract_link_content":
+            payload = {k: v for k, v in arguments.items() if k != "contract_link_id"}
+            response = await httpxClient.post(f"/api/contract_links/{arguments.get('contract_link_id')}/content", json=payload)
+        elif name == "delete_contract_link":
+            response = await httpxClient.post(f"/api/contract_links/{arguments.get('contract_link_id')}/delete")
+        elif name == "list_contract_links":
+            response = await httpxClient.get("/api/contract_links")
 
         else:
             raise ValueError(f"Unknown tool: {name}")

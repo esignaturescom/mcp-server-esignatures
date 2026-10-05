@@ -16,7 +16,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
         "assigned_user_email": {"type": "string", "description": "Assigns an eSignatures.com user as contract owner with edit/view/send rights and notification settings. Contract owners get email notifications for signings and full contract completion if enabled on their Profile."},
         "labels": {"type": "array", "description": "Assigns labels to the contract, overriding template labels. Labels assist in organizing contracts without using folders.", "items": {"type": "string"}},
         "test": {"type": "string", "description": "Marks contract as 'demo' with no fees; adds DEMO stamp, disables reminders.", "enum": ["yes", "no"]},
-        "save_as_draft": {"type": "string", "description": "Saves contract as draft for further editing; draft can be reviewed, edited and sent via UI.", "enum": ["yes", "no"]},
+        "save_as_draft": {"type": "string", "description": "Saves contract as draft for further editing; draft can be reviewed, edited and sent with send_draft_contract or from the eSignatures.com UI.", "enum": ["yes", "no"]},
         "signers": {
             "type": "array",
             "description": "List of individuals required to sign the contract. Only include specific persons with their contact details; do not add generic signers.",

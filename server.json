@@ -1,0 +1,11 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.esignatures/mcp",
+  "title": "eSignatures.com",
+  "description": "eSignatures.com: full control of contract content. Read, rewrite, send and track agreements.",
+  "version": "1.0.0",
+  "websiteUrl": "https://esignatures.com",
+  "remotes": [
+    {"type": "streamable-http", "url": "https://esignatures.com/mcp"}
+  ]
+}

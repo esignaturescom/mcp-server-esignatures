@@ -32,7 +32,7 @@ async def serve() -> Server:
         return [
             types.Tool(
                 name="create_contract",
-                description="Creates and sends a new contract. Unless save_as_draft is 'yes', the contract is sent to the signers immediately — if a review is required first, create a draft instead, which the user can then review, customize, and send from the eSignatures.com UI. Content comes either from the template_id parameter or the markdown parameter. Contract owners can customize template content by replacing {{placeholder fields}} via the placeholder_fields parameter.",
+                description="Creates and sends a new contract. Unless save_as_draft is 'yes', the contract is sent to the signers immediately — if a review is required first, create a draft instead, which can be reviewed, edited, then sent with send_draft_contract or from the eSignatures.com UI. Content comes either from the template_id parameter or the markdown parameter. Contract owners can customize template content by replacing {{placeholder fields}} via the placeholder_fields parameter.",
                 inputSchema=INPUT_SCHEMA_CREATE_CONTRACT
             ),
             types.Tool(

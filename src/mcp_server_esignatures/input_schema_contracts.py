@@ -65,7 +65,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
                     "replace_with_text": {"type": "string", "description": "Plain text that replaces the placeholder."},
                     "replace_with_markdown": {
                         "type": "string",
-                        "description": "Markdown content that replaces the placeholder. " + MARKDOWN_CONTENT_DESCRIPTION,
+                        "description": "Markdown content that replaces the placeholder. Uses the same Extended Markdown syntax as the `markdown` parameter.",
                     },
                     "replace_with_template": {"type": "string", "description": "GUID of another template; its full content replaces the placeholder."},
                 },

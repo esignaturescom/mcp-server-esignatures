@@ -119,6 +119,20 @@ INPUT_SCHEMA_QUERY_CONTRACT = {
     "required": ["contract_id"],
 }
 
+INPUT_SCHEMA_UPDATE_CONTRACT = {
+    "type": "object",
+    "properties": {
+        "contract_id": {"type": "string", "description": "GUID of the contract to update."},
+        "title": {"type": "string", "description": "The contract's title, which appears as the first line in contracts and PDF files, and in email subjects."},
+        "locale": {"type": "string", "description": "Language for signer page and emails.", "enum": ["cz", "da", "de", "el", "en", "en-GB", "es", "fi", "fr", "hr", "hu", "id", "it", "ja", "nl", "no", "pl", "pt", "ro", "rs", "sk", "sl", "sv", "vi", "zh-CN", "zh-TW"]},
+        "metadata": {"type": "string", "description": "Custom data for contract owners and webhook notifications; e.g. internal IDs. Blank removes the metadata."},
+        "expires_at": {"type": "string", "format": "date-time", "description": "Contract expiry time in ISO 8601 / RFC 3339 format, e.g. 2026-12-31T23:59:59Z; expired contracts can't be signed."},
+        "assigned_user_email": {"type": "string", "description": "Assigns an eSignatures.com user as contract owner with edit/view/send rights and notification settings. Contract owners get email notifications for signings and full contract completion if enabled on their Profile. Blank removes the assigned user."},
+        "labels": {"type": "array", "description": "List of labels to be assigned to the contract. Empty array clears the list.", "items": {"type": "string"}},
+    },
+    "required": ["contract_id"],
+}
+
 INPUT_SCHEMA_SEND_DRAFT_CONTRACT = {
     "type": "object",
     "properties": {

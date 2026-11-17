@@ -9,7 +9,7 @@ import mcp.types as types
 from mcp.server import NotificationOptions, Server
 import mcp.server.stdio
 
-from .input_schema_contracts import INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_QUERY_CONTRACT, INPUT_SCHEMA_SEND_DRAFT_CONTRACT, INPUT_SCHEMA_WITHDRAW_CONTRACT, INPUT_SCHEMA_DELETE_CONTRACT, INPUT_SCHEMA_LIST_RECENT_CONTRACTS
+from .input_schema_contracts import INPUT_SCHEMA_CREATE_CONTRACT, INPUT_SCHEMA_QUERY_CONTRACT, INPUT_SCHEMA_UPDATE_CONTRACT, INPUT_SCHEMA_SEND_DRAFT_CONTRACT, INPUT_SCHEMA_WITHDRAW_CONTRACT, INPUT_SCHEMA_DELETE_CONTRACT, INPUT_SCHEMA_LIST_RECENT_CONTRACTS
 from .input_schema_signers import (INPUT_SCHEMA_ADD_CONTRACT_SIGNER, INPUT_SCHEMA_UPDATE_CONTRACT_SIGNER, INPUT_SCHEMA_RESEND_CONTRACT_SIGNER_REQUEST, INPUT_SCHEMA_DELETE_CONTRACT_SIGNER)
 from .input_schema_placeholder_fields import (INPUT_SCHEMA_QUERY_PLACEHOLDER_FIELDS, INPUT_SCHEMA_UPDATE_PLACEHOLDER_FIELDS)
 from .input_schema_contract_content import (INPUT_SCHEMA_QUERY_CONTRACT_CONTENT, INPUT_SCHEMA_UPDATE_CONTRACT_CONTENT)
@@ -39,6 +39,11 @@ async def serve() -> Server:
                 name="query_contract",
                 description="Responds with the contract details, contract_id, status, final PDF url if present, title, labels, metadata, expiry time if present, and signer details with all signer events (signer events are included only for recent contracts, with rate limiting).",
                 inputSchema=INPUT_SCHEMA_QUERY_CONTRACT
+            ),
+            types.Tool(
+                name="update_contract",
+                description="Updates a draft or active contract's title, locale, metadata, expiry time, assigned owner and labels. Only the parameters included are changed. Use update_contract_content to edit the body, and update_contract_signer for signer details.",
+                inputSchema=INPUT_SCHEMA_UPDATE_CONTRACT
             ),
             types.Tool(
                 name="send_draft_contract",
@@ -203,6 +208,9 @@ async def serve() -> Server:
             response = await httpxClient.post("/api/contracts", json={**arguments, "contract_source": "mcpserver"})
         elif name == "query_contract":
             response = await httpxClient.get(f"/api/contracts/{arguments.get('contract_id')}")
+        elif name == "update_contract":
+            payload = {k: v for k, v in arguments.items() if k != "contract_id"}
+            response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}", json=payload)
         elif name == "send_draft_contract":
             response = await httpxClient.post(f"/api/contracts/{arguments.get('contract_id')}/send_draft")
         elif name == "withdraw_contract":

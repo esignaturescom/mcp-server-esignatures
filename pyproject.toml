@@ -1,6 +1,6 @@
 [project]
 name = "mcp-server-esignatures"
-version = "0.3.0"
+version = "0.3.1"
 description = "MCP server for eSignatures.com (https://esignatures.com)"
 readme = "README.md"
 requires-python = ">=3.10"

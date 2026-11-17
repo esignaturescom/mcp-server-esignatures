@@ -22,8 +22,9 @@ Built for intelligent, adaptive contract workflows — not outdated PDF-based si
 | Tool                                 | Category       | Description                                              |
 | ------------------------------------ | -------------- | -------------------------------------------------------- |
 | `create_contract`                    | Contracts      | Send a contract, or save it as a draft for review        |
-| `send_draft_contract`                | Contracts      | Send a draft contract to its signers                     |
 | `query_contract`                     | Contracts      | Retrieve contract info                                   |
+| `update_contract`                    | Contracts      | Update title, locale, metadata, expiry, owner, labels    |
+| `send_draft_contract`                | Contracts      | Send a draft contract to its signers                     |
 | `withdraw_contract`                  | Contracts      | Withdraw an active contract                              |
 | `delete_contract`                    | Contracts      | Delete a draft or test contract                          |
 | `list_recent_contracts`              | Contracts      | List recent contracts, 100 per page                      |

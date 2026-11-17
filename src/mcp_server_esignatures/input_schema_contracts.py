@@ -9,7 +9,7 @@ INPUT_SCHEMA_CREATE_CONTRACT = {
             "description": "Ad-hoc contract body, used to create a contract WITHOUT a template. Provide either template_id or markdown, not both. " + MARKDOWN_CONTENT_DESCRIPTION,
         },
         "title": {"type": "string", "description": "Sets the contract's title, which appears as the first line in contracts and PDF files, in email subjects, and overrides the template's title. Recommended when using the `markdown` parameter, as there is no template title to fall back on."},
-        "locale": {"type": "string", "description": "Language for signer page and emails.", "enum": ["cz", "da", "de", "el", "en", "en-GB", "es", "fi", "fr", "hr", "hu", "id", "it", "ja", "nl", "no", "pl", "pt", "ro", "rs", "sk", "sl", "sv", "vi", "zh-CN"]},
+        "locale": {"type": "string", "description": "Language for signer page and emails.", "enum": ["cz", "da", "de", "el", "en", "en-GB", "es", "fi", "fr", "hr", "hu", "id", "it", "ja", "nl", "no", "pl", "pt", "ro", "rs", "sk", "sl", "sv", "vi", "zh-CN", "zh-TW"]},
         "metadata": {"type": "string", "description": "Custom data for contract owners and webhook notifications; e.g. internal IDs."},
         "expires_in_hours": {"type": "string", "description": "Sets contract expiry time in hours; expired contracts can't be signed. Expiry period can be extended per contract in eSignatures.com."},
         "custom_webhook_url": {"type": "string", "description": "Overrides default webhook HTTPS URL for this contract, defined on the API page in eSignatures.com. Retries 6 times with 1 hour delays, timeout is 20 seconds."},
